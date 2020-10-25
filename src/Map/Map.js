@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, {  useEffect } from 'react'
 import './Map.css';
 
 import 'ol/ol.css';
@@ -11,7 +11,6 @@ export const MapContext = React.createContext(map)
 function MapViewer() {
 
     useEffect(() => {
-        console.log('map rendered');
         map.setTarget('map')
     })
 

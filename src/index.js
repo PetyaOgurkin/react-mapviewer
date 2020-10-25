@@ -1,19 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import MapViewer from './Map/Map';
-import Click from './Map/Click'
 
 import * as serviceWorker from './serviceWorker';
 import TilesSelect from './Map/Tiles/Tile';
+import Sortable from './sortable';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <MapViewer />
-    <Click />
     <TilesSelect />
+    <Sortable />
   </React.StrictMode>,
   document.getElementById('root')
 );

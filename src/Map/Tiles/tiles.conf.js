@@ -5,7 +5,7 @@ const tiles = {
     },
     sentinel: {
         URL: 'http://monitor.krasn.ru/tiles/sentinel2016/{z}/{x}/{-y}.jpeg',
-        resolution_levels: 12
+        resolution_levels: 12,
     },
     relief_dark: {
         URL: 'http://monitor.krasn.ru/tiles/relief_dark/{z}/{x}/{-y}.jpeg',

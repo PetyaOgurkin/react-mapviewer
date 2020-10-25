@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import tilesConf from './tiles.conf'
 import { MapContext } from '../Map'
 import MapMath from '../mapmath'
@@ -10,34 +10,12 @@ import XYZ from 'ol/source/XYZ';
 import TileGrid from 'ol/tilegrid/TileGrid';
 import { getTopLeft } from 'ol/extent'
 
+import { DropdownButton, Dropdown } from 'react-bootstrap'
+
 export default function TilesSelect() {
 
-    console.log('til');
-
     const map = useContext(MapContext)
-
-    const [tile, setTile] = useState(null)
-
-    const changeTileHandler = e => {
-
-        const tiled = generateTile(e.target.value);
-
-        if (tile) map.removeLayer(tile)
-
-        setTile(tiled)
-
-        console.log(tile);
-
-        map.addLayer(tiled)
-        map.setView(
-            new View({
-                center: [0, -24e5],
-                zoom: 1,
-                projection,
-                extent: MapMath.extent.EPSG3576
-            })
-        )
-    }
+    const [tile, setTile] = useState({})
 
     const generateTile = tileName => {
         return new TileLayer({
@@ -53,9 +31,32 @@ export default function TilesSelect() {
         })
     }
 
+    const changeTileHandler = tileName => {
+
+        if (tileName !== tile.name) {
+            const tiled = generateTile(tileName);
+            if (tile.layer) map.removeLayer(tile.layer)
+
+            setTile({ name: tileName, layer: tiled })
+            map.addLayer(tiled)
+            map.setView(
+                new View({
+                    center: [0, -24e5],
+                    zoom: 1,
+                    projection,
+                    extent: MapMath.extent.EPSG3576
+                })
+            )
+        }
+    }
+
+    useEffect(() => {
+        changeTileHandler('topo')
+    }, [])
+
     return (
-        <select onChange={changeTileHandler}>
-            {Object.keys(tilesConf).map(val => <option value={val} key={val}>{val}</option>)}
-        </select>
+        <DropdownButton id="dropdown-item-button" title="Tiles">
+            {Object.keys(tilesConf).map((val, index) => <Dropdown.Item as="button" key={index} onClick={changeTileHandler.bind(null, val)} value={val} className={val === tile.name ? 'active' : ''}>{val}</Dropdown.Item>)}
+        </DropdownButton>
     )
 }
