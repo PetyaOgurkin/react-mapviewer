@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
-import { sortableContainer, sortableElement } from 'react-sortable-hoc';
-import arrayMove from 'array-move';
-import { ListGroup } from 'react-bootstrap'
+import React, { useState } from "react";
+import { ReactSortable } from "react-sortablejs";
 
-
-const SortableItem = sortableElement(({ value }) => <ListGroup.Item>{value}</ListGroup.Item>);
-
-const SortableContainer = sortableContainer(({ children }) => {
-    return <ListGroup>{children}</ListGroup>;
-});
+import { ListGroup } from "react-bootstrap";
 
 
 export default function Sortable() {
-    const [layers, setLayers] = useState(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6'])
-
-    const onSortEnd = ({ oldIndex, newIndex }) => {
-        setLayers(arrayMove(layers, oldIndex, newIndex));
-    };
+    const [state, setState] = useState([
+        { id: 1, name: "shrek" },
+        { id: 2, name: "fiona" },
+        { id: 3, name: "donkey" },
+        { id: 4, name: "cat" },
+        { id: 5, name: "cookie" }
+    ]);
 
     return (
-        <SortableContainer onSortEnd={onSortEnd}>
-            {layers.map((value, index) => (
-                <SortableItem key={`item-${value}`} index={index} value={value} />
-            ))}
-        </SortableContainer>
+        <ListGroup className='layers__list'>
+            <ReactSortable list={state} setList={setState} animation={200} delayOnTouchStart={true} delay={5}>
+                {state.map((item) => (
+                    <ListGroup.Item key={item.id}>{item.name}</ListGroup.Item>
+                ))}
+            </ReactSortable>
+        </ListGroup>
     );
-}
+};
