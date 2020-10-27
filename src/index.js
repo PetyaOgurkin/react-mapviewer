@@ -10,15 +10,20 @@ import TilesSelect from './Map/Tiles/Tile';
 import Sortable from './sortable';
 import Catalog from './Catalog/Catalog';
 import Layers from './Map/Layers/Layers';
+import { LayersContextProvider } from './Map/Layers/LayersContext';
 
 
 ReactDOM.render(
   <>
     <MapViewer />
     <TilesSelect />
-    <Layers />
 
-    <Catalog />
+    <LayersContextProvider>
+      <Layers />
+      <Catalog />
+    </LayersContextProvider>
+
+    {/* <Sortable /> */}
   </>,
   document.getElementById('root')
 );

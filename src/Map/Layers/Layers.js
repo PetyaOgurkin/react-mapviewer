@@ -1,29 +1,22 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { CatalogContext } from '../../Catalog/CatalogContext'
-import { ListGroup } from 'react-bootstrap'
-import { ReactSortable } from 'react-sortablejs'
-
-
-
+import React, { useState } from 'react'
+import { useLayersContext } from './LayersContext'
+import { ListGroup } from 'react-bootstrap';
+import { ReactSortable } from 'react-sortablejs';
 
 export default function Layers() {
 
-    const context = useContext(CatalogContext)
+    const { listOfLayers, setListOfLayers } = useLayersContext();
 
-    const [state, setState] = useState(context)
+    // const [state, setState] = useState(listOfLayers)
 
-    console.log(context, 'context from layers');
-    console.log(state, 'state from layers');
 
     return (
-        <div>
-            <ListGroup className='layers__list'>
-                <ReactSortable list={state} setList={setState} animation={200} delayOnTouchStart={true} delay={5}>
-                    {state.filter((item) => item.onMap).map((item, i) => (
-                        <ListGroup.Item key={i}>{item.title}</ListGroup.Item>
-                    ))}
-                </ReactSortable>
-            </ListGroup>
-        </div>
+        <ListGroup className='layers__list'>
+            <ReactSortable list={listOfLayers} setList={setListOfLayers} animation={200} delayOnTouchStart={true} delay={5}>
+                {listOfLayers.map((item, i) => (
+                    <ListGroup.Item key={i}>{item.title}</ListGroup.Item>
+                ))}
+            </ReactSortable>
+        </ListGroup>
     )
 }

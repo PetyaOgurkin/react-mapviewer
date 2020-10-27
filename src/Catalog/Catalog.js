@@ -1,8 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Button, Modal, ListGroup } from 'react-bootstrap';
-import { CatalogContext } from './CatalogContext';
-// import layers from './catalog.conf'
-
+import { useLayersContext } from '../Map/Layers/LayersContext';
+import layers from './catalog.conf'
 
 
 export default function Catalog() {
@@ -10,10 +9,12 @@ export default function Catalog() {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
-    const context = useContext(CatalogContext)
 
-    const [checkedList, setCheckedList] = useState(context)
+    const [checkedList, setCheckedList] = useState(layers)
+
+
+    const { addLayer } = useLayersContext()
+
 
     const checkToggleHandler = event => {
         checkedList.forEach(element => {
@@ -37,6 +38,7 @@ export default function Catalog() {
             if (element.checked && !element.onMap) {
                 element.onMap = !element.onMap
                 element.checked = !element.checked
+                addLayer(element)
             }
         })
         setCheckedList(checkedList);

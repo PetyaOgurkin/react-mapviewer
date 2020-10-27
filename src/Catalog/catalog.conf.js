@@ -14,6 +14,30 @@ const layers = [
         key: 'akj7737z2a5rmeyz',
         checked: false,
         onMap: false
+    },
+    {
+        title: 'GPM1',
+        URL: 'http://gis.krasn.ru/mserver/ogc.php?id=e2cb3bf9-5c11-ef70-90c6-563045a12e99&key=akj7737z2a5rmeyz&p1=2020-06&p3=20200622',
+        id: 'e2cb3bf9-5c11-ef70-90c6-563045a12e99',
+        key: 'akj7737z2a5rmeyz',
+        checked: false,
+        onMap: false
+    },
+    {
+        title: 'GPM2',
+        URL: 'http://gis.krasn.ru/mserver/ogc.php?id=e2cb3bf9-5c11-ef70-90c6-563045a12e99&key=akj7737z2a5rmeyz&p1=2020-06&p3=20200622',
+        id: 'e2cb3bf9-5c11-ef70-90c6-563045a12e99',
+        key: 'akj7737z2a5rmeyz',
+        checked: false,
+        onMap: false
+    },
+    {
+        title: 'GPM3',
+        URL: 'http://gis.krasn.ru/mserver/ogc.php?id=e2cb3bf9-5c11-ef70-90c6-563045a12e99&key=akj7737z2a5rmeyz&p1=2020-06&p3=20200622',
+        id: 'e2cb3bf9-5c11-ef70-90c6-563045a12e99',
+        key: 'akj7737z2a5rmeyz',
+        checked: false,
+        onMap: false
     }
 ]
 
